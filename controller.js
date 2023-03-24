@@ -37,7 +37,6 @@ const addUtilisateur = async (req,res) => {
 const removeUtilisateur = (req, res) => {
     const idutilisateur = parseInt(req.params.idutilisateur);
     // const idutilisateur = req.body.idutilisateur;
-    // const idutilisateur = req.body.idutilisateur;
     pool.query(queries.getUtilisateurById, [idutilisateur], (error,results) => {
         const noUtilisateurFound = !results.rows.length;
         if (noUtilisateurFound){
