@@ -30,13 +30,13 @@ const removeReponse = "delete from reponses where idreponse = $1 ";
 const getSocietes = "select * from societes";
 const getSocietesById = "select * from societes where idsociete = $1";
 const addSociete =
-  "insert into societes (nomsociete,adresse,numerotel,email,password,gouvernorat,temps,prix,poids,description,logo) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9 ,$10 , $11)";
+  "insert into societes (nomsociete,adresse,numerotel,email,password,gouvernorat,prix,description,logo,tempsmin,tempsmax,poidsmin,poidsmax,volumemin,volumemax,typecolis,fragile) values($1, $2, $3, $4, $5 ,$6 ,$7 ,$8 ,$9 ,$10 , $11, $12, $13, $14, $15, $16, $17)";
 const updateSociete =
-  "update societes set  logo =$1 where idsociete =$2";
+  "update societes set adresse =$1 , numerotel =$2 , gouvernorat =$3,temps =$4, prix =$5 ,poids =$6, description =$7,  logo =$8 where idsociete =$9";
 const removeSociete = "delete from societes where idsociete = $1 ";
 
 const getClientavis =
-  "SELECT(nom,prenom,email,clientavis,utilisateurs.idutilisateur) FROM utilisateurs INNER JOIN avis ON utilisateurs.idutilisateur = avis.idutilisateur;";
+  "SELECT nom,prenom,email,clientavis,utilisateurs.idutilisateur FROM utilisateurs INNER JOIN avis ON utilisateurs.idutilisateur = avis.idutilisateur;";
 const getClientavisbyID =
   "SELECT nom,prenom,clientavis FROM avis INNER JOIN  utilisateurs ON utilisateurs.idutilisateur = avis.idutilisateur where utilisateurs.idutilisateur=$1";
 
@@ -44,6 +44,9 @@ const checkloginclient =
   "select * from utilisateurs where email =$1 and password = $2";
 const checkloginsociete =
   "select * from societes where email =$1 and password = $2";
+
+const DataHome =
+  "select (nomsociete,logo,description,prix,temps,poids,gouvernorats,nbreetoile,clientavis,nom,prenom) from ";
 
 module.exports = {
   getUtilisateurs,
@@ -84,4 +87,6 @@ module.exports = {
 
   checkloginclient,
   checkloginsociete,
+
+  DataHome,
 };

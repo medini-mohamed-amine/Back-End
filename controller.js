@@ -258,11 +258,17 @@ const addSociete = async (req, res) => {
     email,
     password,
     gouvernorat,
-    temps,
     prix,
-    poids,
     description,
     logo,
+    tempsmin,
+    tempsmax,
+    poidsmin,
+    poidsmax,
+    volumemin,
+    volumemax,
+    typecolis,
+    fragile,
   } = req.body;
   //add societe to db
   pool.query(
@@ -274,11 +280,17 @@ const addSociete = async (req, res) => {
       email,
       password,
       gouvernorat,
-      temps,
       prix,
-      poids,
       description,
       logo,
+      tempsmin,
+      tempsmax,
+      poidsmin,
+      poidsmax,
+      volumemin,
+      volumemax,
+      typecolis,
+      fragile,
     ],
     (error, results) => {
       if (error) throw error;
@@ -289,7 +301,16 @@ const addSociete = async (req, res) => {
 
 const updateSociete = (req, res) => {
   const idsociete = parseInt(req.params.idsociete);
-  const { logo } = req.body;
+  const {
+    adresse,
+    numerotel,
+    gouvernorat,
+    temps,
+    prix,
+    poids,
+    description,
+    logo,
+  } = req.body;
   // check if the societe exist or no in the database
   pool.query(queries.getSocietesById, [idsociete], (error, results) => {
     const noSocieteFound = !results.rows.length;
@@ -299,7 +320,17 @@ const updateSociete = (req, res) => {
     // update the societe if he exists in the database
     pool.query(
       queries.updateSociete,
-      [logo, idsociete],
+      [
+        adresse,
+        numerotel,
+        gouvernorat,
+        temps,
+        prix,
+        poids,
+        description,
+        logo,
+        idsociete,
+      ],
       (error, results) => {
         if (error) throw error;
         res.status(200).send("Societe updated successfully ");
